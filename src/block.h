@@ -21,7 +21,7 @@ public:
     };
 public:
     Block();
-    void Draw() const;
+    void Draw(int offsetX, int offsetY) const;
     void Move(int rows, int cols);
     [[nodiscard]] std::vector<Position> GetCellPositions() const;
     void Rotate();

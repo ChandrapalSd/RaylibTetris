@@ -16,12 +16,13 @@ public:
     static const int ROWCOUNT = 20;
     static const int COLCOUNT = 10;
     int grid[ROWCOUNT][COLCOUNT] = {}; // Block::Type
+    static const int padding = 11;
 private:
     int numRows;
     int numCols;
     int cellSize;
     std::vector<Color> colors;
     [[nodiscard]] bool IsRowFull(int r) const;
-    void ClearRow(int r) ;
-    void MoveRowDown(int r, int count) ;
+    void ClearRow(int r);
+    void MoveRowDown(int r, int count);
 };

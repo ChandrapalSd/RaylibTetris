@@ -6,13 +6,18 @@ Block::Block()
 {
 }
 
-void Block::Draw() const
+void Block::Draw(int offsetX, int offsetY) const
 {
     const std::vector<Position>& tiles = cells.at(rotationState);
 
     for(Position tile: tiles)
     {
-        DrawRectangle(tile.column* cellSize+1+colOffset*cellSize, tile.row* cellSize+1+rowOffset*cellSize, cellSize-1, cellSize-1, colors[type]);
+        DrawRectangle(  tile.column* cellSize + colOffset*cellSize + offsetX,
+                        tile.row* cellSize + rowOffset*cellSize + offsetY, 
+                        cellSize-1, 
+                        cellSize-1, 
+                        colors[type]
+                    );
     }
 }
 

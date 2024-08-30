@@ -7,6 +7,7 @@ class Game
 {
 public:
     Game();
+    ~Game();
     Block GetRandomBlock();
     void HandleInput();
     void MoveBlockLeft();
@@ -18,10 +19,16 @@ public:
     void LockBlock();
     [[nodiscard]] bool BlockFits() const;
     void Reset();
+    bool gameOver;
+    int score;
+private:
+    void UpdateScore(int linesCleared, int moveDownPoints);
 private:
     Grid grid;
     Block currentBlock;
+    Block nextBlock;
     std::vector<Block> blocks;
-    bool gameOver;
+    Sound rotateSound;
+    Sound clearSound;
 };
 
