@@ -7,15 +7,21 @@ class Grid
 public:
     Grid();
     void Initialize();
-    void Print();
-    void Draw();
+    void Print() const;
+    void Draw() const;
     [[nodiscard]] bool IsCellOutside(int r, int c) const;
+    [[nodiscard]] bool IsCellEmpty(int r, int c) const;
+    int ClearFullRows();
 public:
-
-    int grid[20][10] = {};
+    static const int ROWCOUNT = 20;
+    static const int COLCOUNT = 10;
+    int grid[ROWCOUNT][COLCOUNT] = {}; // Block::Type
 private:
     int numRows;
     int numCols;
     int cellSize;
     std::vector<Color> colors;
+    [[nodiscard]] bool IsRowFull(int r) const;
+    void ClearRow(int r) ;
+    void MoveRowDown(int r, int count) ;
 };

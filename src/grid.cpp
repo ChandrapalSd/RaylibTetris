@@ -17,7 +17,7 @@ void Grid::Initialize()
     colors = GetCellColors();
 }
 
-void Grid::Print()
+void Grid::Print() const
 {
     for (int i = 0; i < numRows; i++)
     {
@@ -30,7 +30,7 @@ void Grid::Print()
     
 }
 
-void Grid::Draw()
+void Grid::Draw() const
 {
     for (int row = 0; row < numRows; row++)
     {
@@ -47,3 +47,54 @@ bool Grid::IsCellOutside(int r, int c) const
 {
     return !(r>=0 && r <numRows && c>=0 && c<numCols);
 }
+
+bool Grid::IsCellEmpty(int r, int c) const
+{
+    return grid[r][c] == 0; // Block::Type::Empty
+}
+
+int Grid::ClearFullRows()
+{
+    int completed = 0;
+    for (int r = numRows-1; r >=0; r--)
+    {
+        if(IsRowFull(r))
+        {
+            ClearRow(r);
+            completed++;    
+        } 
+        else if(completed>0)
+        {
+            MoveRowDown(r, completed);
+        }
+    }
+    
+    return completed;
+}
+
+bool Grid::IsRowFull(int r) const
+{
+    for(const int e: grid[r])
+    {
+        if(e == 0)
+            return false;
+    }
+    return true;
+}
+
+void Grid::ClearRow(int r)
+{
+    for(int& e: grid[r])
+        e = 0;
+}
+
+void Grid::MoveRowDown(int r, int count)
+{
+    //TODO(CP): assert r+cout < ROWCOUNT
+    for (int c = 0; c < COLCOUNT; c++)
+    {
+        grid[r+count][c] = grid[r][c];
+        grid[r][c] = 0;
+    }
+}
+
